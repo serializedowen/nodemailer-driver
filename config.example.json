@@ -1,0 +1,20 @@
+{
+  "amqp": {
+    "protocal": "amqp",
+    "hostname": "localhost",
+    "port": "5672",
+    "username": "",
+    "password": ""
+  },
+  "queue": "nodemailer-amqp",
+
+  "publisher": {
+    "port": 1512
+  },
+  "smtp": {
+    "port": 1,
+    "host": "1",
+    "username": "1",
+    "password": "1"
+  }
+}

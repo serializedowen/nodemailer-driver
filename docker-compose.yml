@@ -1,0 +1,25 @@
+
+services:
+  nodemailer: 
+    build: .
+    container_name: nodemailer
+    ports:
+      - "1512:1512"
+    
+    depends_on: 
+      - rabbitmq
+
+
+
+  rabbitmq: 
+      image: rabbitmq:3-management
+      container_name: rabbitmq
+      environment:
+        RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+        RABBITMQ_DEFAULT_USER: "rabbitmq"
+        RABBITMQ_DEFAULT_PASS: "rabbitmq"
+        RABBITMQ_DEFAULT_VHOST: "/"
+      ports:
+        - "5672:5672"
+        - '15672:15672'
+
