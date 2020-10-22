@@ -4,7 +4,7 @@ services:
     build: .
     container_name: nodemailer
     ports:
-      - "1512:1512"
+      - "32151:32151"
     
     depends_on: 
       - rabbitmq
