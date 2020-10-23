@@ -9,7 +9,7 @@
   "queue": "nodemailer-amqp",
 
   "publisher": {
-    "port": 1512
+    "port": 32151
   },
   "smtp": {
     "port": 1,

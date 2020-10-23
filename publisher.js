@@ -5,15 +5,13 @@ const config = require("./config");
 var bodyParser = require("body-parser");
 const express = require("express");
 const { isEmail } = require("@serializedowen/regex.js");
-const jsonParser = bodyParser.json();
-const retry = require("bluebird-retry");
-const app = express();
 
 const { EventEmitter } = require("events");
-
+const retry = require("bluebird-retry");
+const app = express();
+const jsonParser = bodyParser.json();
+const logger = require("./logger");
 const eventEmitter = new EventEmitter();
-
-const logger = require("debug")("publisher");
 
 // app.use(jsonParser);
 app.get("/", (req, res) => {
@@ -32,7 +30,7 @@ app.post("/send", jsonParser, (req, res, next) => {
 });
 
 app.listen(config.publisher.port, () =>
-  console.log(`Example app listening on port ${config.publisher.port}!`)
+  logger.info(`Example app listening on port ${config.publisher.port}!`)
 );
 
 retry(
@@ -64,7 +62,9 @@ retry(
         };
 
         eventEmitter.on("sendemail", (message) => {
-          sender(message, () => logger(message.toString() + "sent to queue!"));
+          sender(message, () =>
+            logger.info(message.toString() + "sent to queue!")
+          );
         });
       }),
   { max_tries: 200000 }
